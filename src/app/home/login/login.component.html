@@ -1,0 +1,15 @@
+<mat-card>
+  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()" novalidate>
+    <mat-input-container>
+      <input matInput type="text" formControlName="user" placeholder="Usuario">
+      <mat-error *ngIf="form.get('user').hasError('required')" i18n>This field is required</mat-error>
+    </mat-input-container>
+
+    <mat-input-container>
+      <input matInput type="password" formControlName="password" placeholder="Password">
+      <mat-error *ngIf="form.get('password').hasError('required')" i18n>This field is required</mat-error>
+    </mat-input-container>
+    
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid || form.pristine">Login</button>
+  </form>
+</mat-card>
