@@ -1,7 +1,11 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  <div fxLayoutAlign="space-between center">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  
+    <button mat-button mat-raised-button color="accent">Create</button>
+  </div>
 
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="candidato">
@@ -11,20 +15,25 @@
 
     <ng-container matColumnDef="fecha">
       <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="skills_busqueda">
       <mat-header-cell *matHeaderCellDef> Skill </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.skills_busqueda[0].nombre}} </mat-cell>
+      <mat-cell *matCellDef="let element"> 
+        <mat-chip-list>
+          <mat-chip *ngFor="let skill of element.skills_busqueda">{{skill.nombre | uppercase}}</mat-chip>
+        </mat-chip-list>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button mat-icon-button>edit</button>
-        </mat-cell>
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button [routerLink]="[element.id]"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button [routerLink]="[element.id, 'play']"><mat-icon>play_arrow</mat-icon></button>
+      </mat-cell>
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

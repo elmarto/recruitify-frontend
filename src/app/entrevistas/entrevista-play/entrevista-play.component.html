@@ -1,0 +1,71 @@
+<mat-card>
+  {{entrevista | json}}
+  <div fxLayoutAlign="space-between center">
+    <span fxLayout="column" fxLayoutAlign="top start" fxLayoutGap="1em">
+      <h2>Entrevista: {{entrevista.candidato.nombre}}</h2>
+      <h4>{{entrevista.busqueda.descripcion}}</h4>
+    </span>
+    <!-- <mat-chip></mat-chip> -->
+  </div>
+  
+  <section fxLayoutAlign="space-between top" fxLayout.lt-md="column" fxLayoutGap="5">
+    <article fxFlex="45" fxLayout="column">
+      <h3>Observaciones</h3>
+      <small>Estado civil, zona de vivienda, conocimientos complementarios</small>
+      <mat-form-field fxFlex>
+        <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+      </mat-form-field>
+    </article>
+
+    <article fxFlex="45">
+      <h3>Preguntas Técnicas</h3>
+
+      <div *ngFor="let pregunta of entrevista.preguntas; let i = index;">
+        <div fxLayout="column" *ngIf="questionActive === i">
+          <strong>{{pregunta.pregunta}} ({{i+1}} / {{entrevista.preguntas.length}}) <mat-chip>{{pregunta.skill.nombre}}</mat-chip></strong>
+          <span>{{pregunta.respuesta}}</span>
+
+          <div>
+            <mat-button-toggle-group #group="matButtonToggleGroup" required>
+              <mat-button-toggle value="right">
+                <mat-icon>thumb_up</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="wrong">
+                <mat-icon>thumb_down</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="regular">
+                <mat-icon>thumbs_up_down</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="unknown">
+                <mat-icon>close</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="skip">
+                <mat-icon>skip_next</mat-icon>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </section>
+
+  <hr [style.margin]="'2em 0'">
+
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="0.5em">
+    <label>Calificación</label>
+    <mat-slider fxFlex="200px"
+        max="10"
+        min="0"
+        tick-interval="1"
+        thumb-label="true"
+        [(ngModel)]="calificacion">
+    </mat-slider>
+    <mat-chip color="accent">{{calificacion}}</mat-chip>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="0.5em">
+    <button mat-button [routerLink]="['/entrevistas']">Cancelar</button>
+    <button mat-raised-button color="accent" [disabled]="calificacion === 0">Guardar</button>
+  </div>
+</mat-card>

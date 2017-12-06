@@ -1,2 +1,12 @@
-<h1>Recruitify</h1>
+<header>
+  <h1 fxLayoutAlign="start center"><img src="assets/logo.png">Recruitify</h1>
+</header>
+
+<mat-card [ngClass]="{'main-nav': true}"><nav>
+  <button routerLinkActive="active" [routerLink]="['/entrevistas']" mat-button>ENTREVISTAS</button>
+  <button routerLinkActive="active" [routerLink]="['/busquedas']" mat-button>BÚSQUEDAS</button>
+  <button routerLinkActive="active" [routerLink]="['/candidatos']" mat-button>CANDIDATOS</button>
+</nav></mat-card>
+
 <router-outlet></router-outlet>
+

@@ -1,1 +1,30 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+header {
+  background: black;
+  margin: -22px -8px 0 -8px; 
+  padding: 0.5rem 0.5rem 2.5rem 0.5rem;
+}
+
+h1 {
+  text-transform: uppercase;
+  color: white; 
+  font-family: 'Roboto';
+  font-weight: 300;
+  img { height: 2em; margin-right: 0.5em; }
+}
+
+
+.main-nav {
+  margin-top: -2.5em;
+  margin-bottom: 1em;
+  nav {
+    margin-bottom: 1em;
+  
+    .nav-button {
+      &.active {
+        color: rgb(0, 124, 248);
+      }
+    }
+  }
+}
+

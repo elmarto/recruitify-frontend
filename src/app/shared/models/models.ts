@@ -21,8 +21,8 @@ export interface Busqueda {
   id: number;
   descripcion: string;
   estado: string;
-  fecha_creacion: String;
-  skills: Skill;
+  fecha_creacion: Date;
+  skills: Skill[];
   seniority: String;
 }
 
@@ -31,6 +31,7 @@ export interface Entrevista {
   candidato: Candidato;
   puntaje: number;
   fecha: Date;
-  skills_busqueda: Skill[];
+  busqueda: Busqueda;
+  preguntas: Pregunta[];
   notas: string;
 }

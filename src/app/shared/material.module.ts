@@ -7,7 +7,8 @@ import { HttpModule } from '@angular/http';
 import { MatNativeDateModule, MatSelectModule, MatDialogModule, MatSnackBarModule,
   MatSidenavModule, MatButtonModule, MatIconModule, MatTableModule, MatDatepickerModule,
   MatCheckboxModule, MatInputModule, MatButtonToggleModule, MatCardModule, MatProgressSpinnerModule,
-  MatTooltipModule, MatRadioModule, MatGridListModule, MatTabsModule, MatPaginatorModule } from '@angular/material';
+  MatTooltipModule, MatRadioModule, MatGridListModule, MatTabsModule, MatPaginatorModule, MatChipsModule,
+  MatSliderModule } from '@angular/material';
 
 
   const MAT_MODULES = [
@@ -35,6 +36,8 @@ import { MatNativeDateModule, MatSelectModule, MatDialogModule, MatSnackBarModul
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
+    MatChipsModule,
+    MatSliderModule
   ];
 
 @NgModule({

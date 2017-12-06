@@ -12,12 +12,12 @@ import { MaterialPackModule } from './shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './home/login/login.component';
 
-import { MatNativeDateModule, MatSelectModule, MatDialogModule, MatSnackBarModule,
-  MatSidenavModule, MatButtonModule, MatIconModule, MatTableModule, MatDatepickerModule,
-  MatCheckboxModule, MatInputModule, MatButtonToggleModule, MatCardModule, MatProgressSpinnerModule,
-  MatTooltipModule, MatRadioModule, MatGridListModule } from '@angular/material';
+import { EntrevistasService } from './entrevistas/entrevistas.service';
 import { EntrevistasListComponent } from './entrevistas/entrevistas-list/entrevistas-list.component';
 import { EntrevistasDetailComponent } from './entrevistas/entrevistas-detail/entrevistas-detail.component';
+import { BusquedasListComponent } from './busquedas/busquedas-list/busquedas-list.component';
+import { BusquedasDetailComponent } from './busquedas/busquedas-detail/busquedas-detail.component';
+import { EntrevistaPlayComponent } from './entrevistas/entrevista-play/entrevista-play.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +25,16 @@ import { EntrevistasDetailComponent } from './entrevistas/entrevistas-detail/ent
     LoginComponent,
     EntrevistasListComponent,
     EntrevistasDetailComponent,
+    BusquedasListComponent,
+    BusquedasDetailComponent,
+    EntrevistaPlayComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialPackModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    MaterialPackModule,
     FlexLayoutModule
   ],
   providers: [],
