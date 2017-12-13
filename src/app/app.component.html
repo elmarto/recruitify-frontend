@@ -1,12 +1,20 @@
-<header>
-  <h1 fxLayoutAlign="start center"><img src="assets/logo.png">Recruitify</h1>
+<header fxLayoutAlign="space-between center">
+  <div fxLayoutAlign="start center" fxLayoutGap="10px">
+    <img src="assets/logo.png" [style.height]="'40px'"><h1 fxLayoutAlign="start center">recruitify</h1>
+  </div>
+
+  <div *ngIf="url !== '/home' && url !== ''">
+    Bienvenido Martin
+  </div>
 </header>
 
-<mat-card [ngClass]="{'main-nav': true}"><nav>
-  <button routerLinkActive="active" [routerLink]="['/entrevistas']" mat-button>ENTREVISTAS</button>
-  <button routerLinkActive="active" [routerLink]="['/busquedas']" mat-button>BÚSQUEDAS</button>
-  <button routerLinkActive="active" [routerLink]="['/candidatos']" mat-button>CANDIDATOS</button>
-</nav></mat-card>
+<main>
 
-<router-outlet></router-outlet>
+  <mat-card [ngClass]="{'main-nav': true}" *ngIf="url !== '/home' && url !== ''"><nav>
+    <button routerLinkActive="active" [routerLink]="['/busquedas']" mat-button>BÚSQUEDAS</button>
+    <button routerLinkActive="active" [routerLink]="['/entrevistas']" mat-button>ENTREVISTAS</button>
+  </nav></mat-card>
+  
+  <router-outlet></router-outlet>
 
+</main>  

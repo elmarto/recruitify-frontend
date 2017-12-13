@@ -1,0 +1,95 @@
+<mat-card fxLayout="column" fxLayoutGap="15px">
+  <div fxLayoutAlign="space-between center">
+    <span fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
+      <h2>Reporte de Búsqueda | {{busqueda.skills[0].nombre}} {{busqueda.seniority}} para {{busqueda.cliente}}</h2>
+      <h4>{{busqueda.fecha_creacion | date: 'shortDate'}}</h4>
+    </span>
+    <mat-chip>{{busqueda.estado | uppercase}}</mat-chip>
+  </div>
+
+  <div>
+    <h3>Información General</h3>
+
+    <div fxLayout fxLayoutAlign="space-between center" fxLayoutGap="30px">
+
+      <mat-form-field>
+        <input matInput placeholder="Días Activa" [(ngModel)]="diasActiva" disabled>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Seniority" [(ngModel)]="busqueda.seniority" disabled>
+      </mat-form-field>
+  
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span>Skills:</span>
+        <mat-chip-list>
+          <mat-chip *ngFor="let skill of busqueda.skills; let i = index;" (click)="removeSkill(i)">{{skill.nombre | uppercase}}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
+    <div>      
+      <h3>Candidatos</h3>
+      <div fxLayout fxLayoutAlign="space-around center">
+
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h4>Entrevistados</h4>
+          <span>{{entrevistaData.entrevistados}}</span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h4>Aprobados</h4>
+          <span>{{entrevistaData.aprobados}}</span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h4>Desaprobados</h4>
+          <span>{{entrevistaData.desaprobados}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>      
+    <h3>Salarios</h3>
+    <div fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="25px">
+
+        <div fxLayout fxLayoutAlign="space-around center" fxLayoutGap="25px">
+          <h4 [style.marginBottom]="'0'" [style.width]="'100px'">Promedio</h4>
+          <span>${{entrevistaData.salarioAvg}}</span>
+        </div>
+
+        <div fxLayout fxLayoutAlign="space-around center" fxLayoutGap="25px">
+          <h4 [style.marginBottom]="'0'" [style.width]="'100px'">Maximo</h4>
+          <span>${{entrevistaData.salarioMax}}</span>
+        </div>
+
+        <div fxLayout fxLayoutAlign="space-around center" fxLayoutGap="25px">
+          <h4 [style.marginBottom]="'0'" [style.width]="'100px'">Minimo</h4>
+          <span>${{entrevistaData.salarioMin}}</span>
+        </div>
+
+        <div fxLayout fxLayoutAlign="space-around center" fxLayoutGap="25px">
+          <h4 [style.marginBottom]="'0'" [style.width]="'100px'">Mediano</h4>
+          <span>${{entrevistaData.salarioMedian}}</span>
+        </div>
+      </div>
+      <div style="display: block;" fxFlex="50">     
+        <canvas baseChart chartType="doughnut" [labels]="chartSalarios.labels" [data]="chartSalarios.data"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  
+  <h3>Edades</h3>
+  <div>
+    <div style="display: block;" fxFlex="50">      
+      <canvas baseChart chartType="polarArea" [labels]="chartEdad.labels" [data]="chartEdad.data"></canvas>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="0.5em">
+    <button mat-raised-button color="accent" [routerLink]="['/busquedas']">VOLVER</button>
+  </div>
+</mat-card>    

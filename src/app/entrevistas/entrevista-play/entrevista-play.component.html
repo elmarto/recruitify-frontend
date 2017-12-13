@@ -1,52 +1,94 @@
-<mat-card>
-  {{entrevista | json}}
+<mat-card *ngIf="entrevista">
   <div fxLayoutAlign="space-between center">
-    <span fxLayout="column" fxLayoutAlign="top start" fxLayoutGap="1em">
-      <h2>Entrevista: {{entrevista.candidato.nombre}}</h2>
-      <h4>{{entrevista.busqueda.descripcion}}</h4>
-    </span>
-    <!-- <mat-chip></mat-chip> -->
+    <div fxLayout="column" fxLayoutAlign="top start" fxLayoutGap="5px">
+      <h2>Entrevista | {{entrevista.candidato?.nombre}}</h2>
+      <h4>{{entrevista.busqueda?.descripcion}}</h4>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+      <span>Tiempo Transcurrido</span>
+      <mat-chip>        
+        <div>{{ timer/60 | number: '2.0-0' }}:{{ timer % 60  | number: '2.0-0'}}</div>
+      </mat-chip>
+    </div>
   </div>
   
-  <section fxLayoutAlign="space-between top" fxLayout.lt-md="column" fxLayoutGap="5">
+  <section fxLayoutAlign="space-between top" fxLayout.lt-md="column" fxLayoutGap="5" fxLayoutWrap>
     <article fxFlex="45" fxLayout="column">
-      <h3>Observaciones</h3>
-      <small>Estado civil, zona de vivienda, conocimientos complementarios</small>
-      <mat-form-field fxFlex>
-        <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+      <h3>Información General</h3>
+      <mat-form-field>
+        <input matInput placeholder="Pretención Salarial" [(ngModel)]="entrevista.salario">
       </mat-form-field>
+      <mat-form-field fxFlex>
+        <textarea matInput placeholder="Notas" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" [(ngModel)]="entrevista.notas"></textarea>
+      </mat-form-field>
+
     </article>
 
     <article fxFlex="45">
-      <h3>Preguntas Técnicas</h3>
-
+      <h3>Evaluación Técnica</h3>
+      <div fxLayout="row">
+        <div *ngFor="let pregunta of entrevista.preguntas; let i = index;"
+             [ngClass]="{'right': respuestas[i] === 'right', 'wrong': respuestas[i] === 'wrong','regular': respuestas[i] === 'regular', 'question': true, 'current': i === questionActive }"
+        ></div>
+      </div>
+      
       <div *ngFor="let pregunta of entrevista.preguntas; let i = index;">
-        <div fxLayout="column" *ngIf="questionActive === i">
-          <strong>{{pregunta.pregunta}} ({{i+1}} / {{entrevista.preguntas.length}}) <mat-chip>{{pregunta.skill.nombre}}</mat-chip></strong>
-          <span>{{pregunta.respuesta}}</span>
+        <div fxLayout="column" *ngIf="questionActive === i" fxLayoutGap="10px">
+          <div [style.minHeight]="'150px'" fxLayout="column" fxLayoutGap="5px">  
+            <span><strong>{{pregunta.pregunta}}</strong> ({{i+1}} / {{entrevista.preguntas?.length}}) <mat-chip>{{pregunta.skill.nombre}}</mat-chip></span>
+            <span>{{pregunta.respuesta}}</span>
+          </div>
 
           <div>
-            <mat-button-toggle-group #group="matButtonToggleGroup" required>
-              <mat-button-toggle value="right">
+            <mat-button-toggle-group [(ngModel)]="respuestas[i]" required (change)="onAnswer(respuestas[i])">
+              <mat-button-toggle value="prev" [disabled]="i === 0" matTooltip="Atras">
+                <mat-icon>skip_previous</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="right" matTooltip="Correcto">
                 <mat-icon>thumb_up</mat-icon>
               </mat-button-toggle>
-              <mat-button-toggle value="wrong">
+              <mat-button-toggle value="wrong" matTooltip="Incorrecto">
                 <mat-icon>thumb_down</mat-icon>
               </mat-button-toggle>
-              <mat-button-toggle value="regular">
+              <mat-button-toggle value="regular" matTooltip="Regular">
                 <mat-icon>thumbs_up_down</mat-icon>
               </mat-button-toggle>
-              <mat-button-toggle value="unknown">
+              <mat-button-toggle value="unknown" matTooltip="No Contesta">
                 <mat-icon>close</mat-icon>
-              </mat-button-toggle>
-              <mat-button-toggle value="skip">
-                <mat-icon>skip_next</mat-icon>
               </mat-button-toggle>
             </mat-button-toggle-group>
           </div>
         </div>
       </div>
+      <div [style.minHeight]="'150px'" *ngIf="entrevista.preguntas && questionActive === entrevista.preguntas.length">
+        Todas las preguntas han sido respondidas 
+        <button mat-icon-button (click)="onAnswer('prev')"><mat-icon>skip_previous</mat-icon></button>
+      </div>
 
+    </article>
+
+    <article fxFlex="45" fxLayout="column">
+      <h3>Idiomas</h3>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <h4 [style.marginBottom]="'0'">Ingles</h4>
+        <mat-slider fxFlex="140px"
+          max="4"
+          min="0"
+          tick-interval="1"
+          thumb-label="true"
+          [(ngModel)]="ingles">
+        </mat-slider>
+        <small>
+          <span *ngIf="ingles === 0">Sin Conocimientos</span>
+          <span *ngIf="ingles === 1">Básico</span>
+          <span *ngIf="ingles === 2">Intermedio</span>
+          <span *ngIf="ingles === 3">Avanzado</span>
+          <span *ngIf="ingles === 4">Bilingüe</span>
+        </small>
+      </div>
+      
     </article>
   </section>
 
@@ -59,13 +101,13 @@
         min="0"
         tick-interval="1"
         thumb-label="true"
-        [(ngModel)]="calificacion">
+        [(ngModel)]="entrevista.puntaje">
     </mat-slider>
-    <mat-chip color="accent">{{calificacion}}</mat-chip>
+    <mat-chip color="accent">{{entrevista.puntaje}}</mat-chip>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="0.5em">
-    <button mat-button [routerLink]="['/entrevistas']">Cancelar</button>
-    <button mat-raised-button color="accent" [disabled]="calificacion === 0">Guardar</button>
+    <button mat-button [routerLink]="['/entrevistas']">VOLVER</button>
+    <button mat-raised-button color="accent" [disabled]="entrevista.puntaje === 0 || (entrevista.preguntas && questionActive !== entrevista.preguntas.length)" (click)="submit()">FINALIZAR</button>
   </div>
 </mat-card>

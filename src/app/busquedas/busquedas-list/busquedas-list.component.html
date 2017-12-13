@@ -1,30 +1,37 @@
 <mat-card>
+    <h2>Búsquedas</h2>
+
     <div fxLayoutAlign="space-between center">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
     
-      <button mat-button mat-raised-button color="accent">Create</button>
+      <button mat-button mat-raised-button color="accent">CREAR</button>
     </div>
   
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="descripcion">
-        <mat-header-cell *matHeaderCellDef> Descripcion</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.descripcion}} </mat-cell>
+      <ng-container matColumnDef="cliente">
+        <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="posicion">
+          <mat-header-cell *matHeaderCellDef> Posicion </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.skills[0].nombre}} {{element.seniority}} </mat-cell>
+        </ng-container>
   
       <ng-container matColumnDef="estado">
         <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+        <mat-cell *matCellDef="let element"> <mat-chip>{{element.estado | uppercase}}</mat-chip> </mat-cell>
       </ng-container>
       
       <ng-container matColumnDef="fecha_creacion">
         <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.fecha_creacion | date:'shortDate'}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.fecha_creacion.replace('T',' ') | date:'shortDate'}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="skills">
-        <mat-header-cell *matHeaderCellDef> Skill </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Skills </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
           <mat-chip-list>
             <mat-chip *ngFor="let skill of element.skills">{{skill.nombre | uppercase}}</mat-chip>
@@ -35,8 +42,8 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button [routerLink]="['/busquedas', element.id]"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button [routerLink]="['/busquedas', element.id, 'play']"><mat-icon>play_arrow</mat-icon></button>
+          <button mat-icon-button [routerLink]="['/busquedas', element.id]" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button [routerLink]="['/busquedas', element.id, 'report']" matTooltip="Ver Reporte"><mat-icon>event_note</mat-icon></button>
         </mat-cell>
       </ng-container>
   

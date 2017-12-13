@@ -1,10 +1,12 @@
 <mat-card>
+  <h2>Entrevistas</h2>
+    
   <div fxLayoutAlign="space-between center">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
   
-    <button mat-button mat-raised-button color="accent">Create</button>
+    <button mat-button mat-raised-button color="accent">CREAR</button>
   </div>
 
   <mat-table #table [dataSource]="dataSource" matSort>
@@ -18,11 +20,11 @@
       <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="skills_busqueda">
-      <mat-header-cell *matHeaderCellDef> Skill </mat-header-cell>
-      <mat-cell *matCellDef="let element"> 
+    <ng-container matColumnDef="busqueda">
+      <mat-header-cell *matHeaderCellDef> Skills </mat-header-cell>
+      <mat-cell *matCellDef="let element">
         <mat-chip-list>
-          <mat-chip *ngFor="let skill of element.skills_busqueda">{{skill.nombre | uppercase}}</mat-chip>
+          <mat-chip *ngFor="let skill of element.busqueda.skills">{{skill.nombre | uppercase}}</mat-chip>
         </mat-chip-list>
       </mat-cell>
     </ng-container>
@@ -30,8 +32,9 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button [routerLink]="[element.id]"><mat-icon>edit</mat-icon></button>
-        <button mat-icon-button [routerLink]="[element.id, 'play']"><mat-icon>play_arrow</mat-icon></button>
+        <!-- <button mat-icon-button [routerLink]="[element.id]"><mat-icon>edit</mat-icon></button> -->
+        <button mat-icon-button [routerLink]="[element.id, 'play']" matTooltip="Comenzar" *ngIf="!element.puntaje"><mat-icon>play_arrow</mat-icon></button>
+        <strong *ngIf="element.puntaje">{{element.puntaje}}</strong>
       </mat-cell>
     </ng-container>
 

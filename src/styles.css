@@ -2,7 +2,21 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-  background: linear-gradient(to bottom, #bbcbd1 0%,#838e92 50%,#608a9b 100%);
+  /* background: linear-gradient(to bottom, #bbcbd1 0%,#838e92 50%,#608a9b 100%); */
+  background: url(/assets/background.png), rgba(0,0,0,0.5);
+  background-size: cover;
   height: 100vh;
   font-family: 'Roboto';
+}
+
+h2 {
+  color: rgb(70, 128, 164);
+}
+
+h4 {
+  color: gray;
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: 'Bitter';
 }

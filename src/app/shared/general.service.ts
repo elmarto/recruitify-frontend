@@ -6,26 +6,26 @@ import 'rxjs/add/operator/catch';
 import { APP_CONST } from '../app.const';
 
 @Injectable()
-export class EntrevistasService {
+export class GeneralService {
 
   constructor(
     private http: Http
   ) { }
 
-  all() {
-    return this.http.get(`${APP_CONST.SETTINGS.API}/entrevistas`)
+  getSkills() {
+    return this.http.get(`${APP_CONST.SETTINGS.API}/skills`)
       .map((response: Response) => response.json() )
       .catch(error => Observable.throw(error.json()));
   }
 
-  one(id) {
-    return this.http.get(`${APP_CONST.SETTINGS.API}/entrevistas/${id}`)
+  getSeniorities() {
+    return this.http.get(`${APP_CONST.SETTINGS.API}/seniorities`)
       .map((response: Response) => response.json() )
       .catch(error => Observable.throw(error.json()));
   }
 
-  save(id, prospect) {
-    return this.http.post(`${APP_CONST.SETTINGS.SERVER}/entrevistas/update/${id}`, prospect)
+  getCandidates(skillIds) {
+    return this.http.post(`${APP_CONST.SETTINGS.API}/candidates`, skillIds)
       .map((response: Response) => response.json() )
       .catch(error => Observable.throw(error.json()));
   }

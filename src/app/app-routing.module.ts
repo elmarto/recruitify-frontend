@@ -6,6 +6,7 @@ import { EntrevistasDetailComponent } from './entrevistas/entrevistas-detail/ent
 import { EntrevistaPlayComponent } from './entrevistas/entrevista-play/entrevista-play.component';
 import { BusquedasListComponent } from './busquedas/busquedas-list/busquedas-list.component';
 import { BusquedasDetailComponent } from './busquedas/busquedas-detail/busquedas-detail.component';
+import { BusquedasReportComponent } from './busquedas/busquedas-report/busquedas-report.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,7 +15,8 @@ export const appRoutes: Routes = [
   { path: 'entrevistas/:id', component: EntrevistasDetailComponent, pathMatch: 'full', },
   { path: 'entrevistas/:id/play', component: EntrevistaPlayComponent, pathMatch: 'full', },
   { path: 'busquedas', component: BusquedasListComponent},
-  { path: 'busquedas/:id', component: BusquedasDetailComponent, pathMatch: 'full', }
+  { path: 'busquedas/:id', component: BusquedasDetailComponent, pathMatch: 'full', },
+  { path: 'busquedas/:id/report', component: BusquedasReportComponent, pathMatch: 'full', }
 ];
 
 @NgModule({

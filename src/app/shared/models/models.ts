@@ -2,7 +2,7 @@ export interface Candidato {
   id: number;
   nombre: string;
   estado: string;
-  fecha_nacimiento: Date;
+  fecha: Date;
   skills: Skill[];
 }
 export interface Pregunta {
@@ -34,4 +34,5 @@ export interface Entrevista {
   busqueda: Busqueda;
   preguntas: Pregunta[];
   notas: string;
+  salario: number;
 }

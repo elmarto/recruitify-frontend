@@ -1,0 +1,15 @@
+h4 {
+  margin-top: 0px;
+}
+
+.question {
+  background: gray;
+  border-radius: 50%;
+  margin-right: 2px;
+  width: 8px;
+  height: 8px;
+  &.right { background: rgb(23, 119, 23); }
+  &.wrong { background: rgb(177, 20, 20); }
+  &.regular { background: rgb(255, 217, 0); }
+  &.current { border: 1px solid black; }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Busqueda } from '../../shared/models/models';
 import { MOCK_BUSQUEDAS } from '../../mock';
+import { BusquedasService } from '../busquedas.service';
 
 @Component({
   selector: 'app-busquedas-list',
@@ -9,8 +10,8 @@ import { MOCK_BUSQUEDAS } from '../../mock';
   styleUrls: ['./busquedas-list.component.css']
 })
 export class BusquedasListComponent implements OnInit {
-  displayedColumns = ['descripcion', 'estado', 'fecha_creacion', 'skills', 'actions'];
-  dataSource = new MatTableDataSource<Busqueda>(MOCK_BUSQUEDAS);
+  displayedColumns = ['cliente', 'posicion', 'estado', 'fecha_creacion', 'skills', 'actions'];
+  dataSource = null;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
@@ -18,7 +19,11 @@ export class BusquedasListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor() { }
+  constructor(
+    busquedasService: BusquedasService
+  ) {
+    busquedasService.all().subscribe(result => this.dataSource = new MatTableDataSource<Busqueda>(result));
+  }
 
   ngOnInit() {
   }
