@@ -1,7 +1,7 @@
 <mat-card fxLayout="column" fxLayoutGap="15px" *ngIf="busqueda">
   <div fxLayoutAlign="space-between center">
     <span fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
-      <h2>Búsqueda | {{busqueda.skills[0].nombre}} {{busqueda.seniority}} para {{busqueda.cliente}}</h2>
+      <h2>Búsqueda | {{busqueda.skills[0]?.nombre}} {{busqueda.seniority}} para {{busqueda.cliente}}</h2>
       <h4>{{busqueda.fecha_creacion.replace('T',' ')  | date: 'shortDate'}}</h4>
     </span>
     <mat-chip>{{busqueda.estado | uppercase}}</mat-chip>

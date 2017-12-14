@@ -31,9 +31,8 @@ export class BusquedasService {
   }
 
   contactCandidates(id, candidatos) {
-    return this.http.get(`${APP_CONST.SETTINGS.SERVER}/busquedas/contactar/${id}`, candidatos)
-      .map((response: Response) => response.json() )
-      .catch(error => Observable.throw(error.json()));
+    return this.http.post(`${APP_CONST.SETTINGS.SERVER}/busquedas/contactar/${id}`, candidatos)
+      .map((response: Response) => response.json() );
   }
 
   save(id, prospect) {

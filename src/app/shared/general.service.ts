@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { APP_CONST } from '../app.const';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class GeneralService {
@@ -24,8 +25,9 @@ export class GeneralService {
       .catch(error => Observable.throw(error.json()));
   }
 
-  getCandidates(skillIds) {
-    return this.http.post(`${APP_CONST.SETTINGS.API}/candidates`, skillIds)
+  getCandidates(skillIds: any[]) {
+    const params = skillIds.map(id => `ids=${id}`).join('&');
+    return this.http.get(`${APP_CONST.SETTINGS.SERVER}/Candidatos/GetCandidatosSkills?${params}`)
       .map((response: Response) => response.json() )
       .catch(error => Observable.throw(error.json()));
   }

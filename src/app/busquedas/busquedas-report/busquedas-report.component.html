@@ -1,4 +1,4 @@
-<mat-card fxLayout="column" fxLayoutGap="15px">
+<mat-card fxLayout="column" fxLayoutGap="15px" *ngIf="busqueda">
   <div fxLayoutAlign="space-between center">
     <span fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
       <h2>Reporte de Búsqueda | {{busqueda.skills[0].nombre}} {{busqueda.seniority}} para {{busqueda.cliente}}</h2>

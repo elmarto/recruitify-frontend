@@ -26,7 +26,6 @@ export class EntrevistasService {
 
   save(id, prospect) {
     return this.http.post(`${APP_CONST.SETTINGS.SERVER}/entrevistas/update/${id}`, prospect)
-      .map((response: Response) => response.json() )
-      .catch(error => Observable.throw(error.json()));
+      .map((response: Response) => response );
   }
 }

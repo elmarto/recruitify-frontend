@@ -10,7 +10,7 @@ import { EntrevistasService } from '../entrevistas.service';
   styleUrls: ['./entrevistas-list.component.css']
 })
 export class EntrevistasListComponent implements OnInit {
-  displayedColumns = ['candidato', 'fecha', 'busqueda', 'actions'];
+  displayedColumns = ['candidato', 'cliente', 'fecha', 'busqueda', 'actions'];
   dataSource;
 
   applyFilter(filterValue: string) {
@@ -23,7 +23,6 @@ export class EntrevistasListComponent implements OnInit {
     private entrevistasService: EntrevistasService
   ) {
     this.entrevistasService.all().subscribe(entrevistas => {
-        console.log(MOCK_ENTREVISTAS[0]);
       this.dataSource = new MatTableDataSource<Entrevista>(entrevistas);
       console.log(entrevistas);
     }

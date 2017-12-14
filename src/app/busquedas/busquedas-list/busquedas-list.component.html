@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="dataSource">
     <h2>Búsquedas</h2>
 
     <div fxLayoutAlign="space-between center">
@@ -17,7 +17,7 @@
 
       <ng-container matColumnDef="posicion">
           <mat-header-cell *matHeaderCellDef> Posicion </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.skills[0].nombre}} {{element.seniority}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.skills[0]?.nombre}} {{element.seniority}} </mat-cell>
         </ng-container>
   
       <ng-container matColumnDef="estado">
@@ -34,7 +34,7 @@
         <mat-header-cell *matHeaderCellDef> Skills </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
           <mat-chip-list>
-            <mat-chip *ngFor="let skill of element.skills">{{skill.nombre | uppercase}}</mat-chip>
+            <mat-chip *ngFor="let skill of element.skills">{{skill?.nombre | uppercase}}</mat-chip>
           </mat-chip-list>
         </mat-cell>
       </ng-container>

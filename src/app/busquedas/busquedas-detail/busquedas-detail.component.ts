@@ -51,9 +51,8 @@ export class BusquedasDetailComponent implements OnInit {
   obtainCandidates() {
     this.candidatosVisible = false;
     const skillIds = this.busqueda.skills.map(skill => skill.id);
-    const prospect = { skillIds };
-    this.generalService.getCandidates(prospect).subscribe(response => {
-      this.candidatos = response.candidatos;
+    this.generalService.getCandidates(skillIds).subscribe(response => {
+      this.candidatos = response;
       this.dataSource = new MatTableDataSource<Candidato>(this.candidatos);
       this.candidatosVisible = true;
     });

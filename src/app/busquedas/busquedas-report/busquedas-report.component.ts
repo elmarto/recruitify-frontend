@@ -12,8 +12,8 @@ declare var moment;
   styleUrls: ['./busquedas-report.component.css']
 })
 export class BusquedasReportComponent implements OnInit {
-  busqueda: Busqueda = MOCK_BUSQUEDAS[0];
-  entrevistas: Entrevista[] = MOCK_ENTREVISTAS;
+  busqueda: Busqueda = null;
+  entrevistas: Entrevista[] = null;
   diasActiva = null;
   entrevistaData = {
     entrevistados: 0,
@@ -101,7 +101,7 @@ export class BusquedasReportComponent implements OnInit {
     const salarioSum = salarios.reduce(function(a, b) { return a + b; });
     const salarioAvg = Math.floor(salarioSum / salarios.length);
     const salarioMedian = Math.floor(this.getMedian(salarios));
-    const limit1 = Math.floor((salarioMedian - salarioMin) / 2);
+    const limit1 = Math.floor(salarioMedian - ((salarioMedian - salarioMin) / 2));
     const limit2 = Math.floor(salarioMedian + ((salarioMax - salarioMedian) / 2));
 
     this.chartSalarios.labels[0] = `Menos de $${limit1}`;

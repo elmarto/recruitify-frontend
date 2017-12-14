@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="dataSource">
   <h2>Entrevistas</h2>
     
   <div fxLayoutAlign="space-between center">
@@ -15,6 +15,11 @@
       <mat-cell *matCellDef="let element"> {{element.candidato.nombre}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef> Cliente</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.busqueda?.cliente}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="fecha">
       <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
@@ -24,7 +29,7 @@
       <mat-header-cell *matHeaderCellDef> Skills </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <mat-chip-list>
-          <mat-chip *ngFor="let skill of element.busqueda.skills">{{skill.nombre | uppercase}}</mat-chip>
+          <mat-chip *ngFor="let skill of element.busqueda.skills">{{skill?.nombre | uppercase}}</mat-chip>
         </mat-chip-list>
       </mat-cell>
     </ng-container>
